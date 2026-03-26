@@ -1,52 +1,60 @@
-require('dotenv').config({ path: './.env' });
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const path = require('path');
-const connectDB = require('./config/database');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dns from 'dns';
+import connectDB from './config/database.js';
+
+// Fix __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Fix DNS
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 const app = express();
 
-// Connect to MongoDB
+// Connect DB
 connectDB();
 
-// Security middleware
-app.use(helmet({
-  contentSecurityPolicy: false, // disable for serving local assets
-}));
+// Middleware
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 
-// Rate limiting for API
+// Rate limit
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 20,
-  message: { success: false, message: 'Too many requests, please try again later.' }
 });
 app.use('/api/', apiLimiter);
 
 // Body parsing
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
+// Static
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API Routes
-app.use('/api/contact', require('./routes/contact'));
+// Routes
+import contactRoutes from './routes/contact.js';
+app.use('/api/contact', contactRoutes);
 
-// Health check
+// Health
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ status: 'OK' });
 });
 
-// Serve index.html for all non-API routes (SPA)
+// SPA fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 DFX Studio server running on port ${PORT}`);
-  console.log(`🌐 Visit: http://localhost:${PORT}`);
+  console.log(`🚀 Server running on ${PORT}`);
 });
