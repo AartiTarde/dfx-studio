@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFX Studio — Cinematic Photography & Videography</title>
+  <meta name="description" content="DFX Studio — Premium photography and videography services. Weddings, portraits, commercial shoots, and cinematic videos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══ PRELOADER ═══ -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <svg class="preloader-logo" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="5" y="50" font-family="Bebas Neue" font-size="52" fill="#c9a84c" letter-spacing="4">DFX</text>
+      </svg>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ CURSOR ═══ -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">
+      <span class="logo-dfx">DFX</span>
+      <span class="logo-studio">STUDIO</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home" onclick="closeMobile()">Home</a></li>
+      <li><a href="#about" onclick="closeMobile()">About</a></li>
+      <li><a href="#services" onclick="closeMobile()">Services</a></li>
+      <li><a href="#gallery" onclick="closeMobile()">Gallery</a></li>
+      <li><a href="#videos" onclick="closeMobile()">Videos</a></li>
+      <li><a href="#testimonials" onclick="closeMobile()">Reviews</a></li>
+      <li><a href="#contact" onclick="closeMobile()">Book Now</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <!-- Slideshow background images -->
+      <div class="hero-slide active" style="background-image: url('images/hero1.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('images/hero2.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('images/hero3.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tagline" data-aos="fade-up">EST. 2018 — NASHIK, INDIA</p>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+        <span class="title-line">CAPTURING</span>
+        <span class="title-line italic">Your Story</span>
+        <span class="title-line">IN FRAMES</span>
+      </h1>
+      <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+        Cinematic photography & videography that transforms your most precious moments into timeless art.
+      </p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+        <a href="#gallery" class="btn-primary">View Portfolio</a>
+        <a href="#contact" class="btn-ghost">Book a Session</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num" data-count="500">0</span><span class="stat-plus">+</span><p>Projects Done</p></div>
+      <div class="stat-item"><span class="stat-num" data-count="6">0</span><span class="stat-plus">+</span><p>Years Experience</p></div>
+      <div class="stat-item"><span class="stat-num" data-count="350">0</span><span class="stat-plus">+</span><p>Happy Clients</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>WEDDING PHOTOGRAPHY</span><span class="dot">✦</span>
+      <span>PORTRAIT SESSIONS</span><span class="dot">✦</span>
+      <span>CINEMATIC VIDEOS</span><span class="dot">✦</span>
+      <span>COMMERCIAL SHOOTS</span><span class="dot">✦</span>
+      <span>EVENT COVERAGE</span><span class="dot">✦</span>
+      <span>BABY SHOOTS</span><span class="dot">✦</span>
+      <span>WEDDING PHOTOGRAPHY</span><span class="dot">✦</span>
+      <span>PORTRAIT SESSIONS</span><span class="dot">✦</span>
+      <span>CINEMATIC VIDEOS</span><span class="dot">✦</span>
+      <span>COMMERCIAL SHOOTS</span><span class="dot">✦</span>
+      <span>EVENT COVERAGE</span><span class="dot">✦</span>
+      <span>BABY SHOOTS</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="about section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images">
+          <div class="about-img-main reveal-left">
+            <img src="images/about1.jpg" alt="DFX Studio photographer at work" />
+          </div>
+          <div class="about-img-accent reveal-up">
+            <img src="images/about2.jpg" alt="DFX Studio behind the scenes" />
+          </div>
+          <div class="about-award reveal-up">
+            <span class="award-icon">🏆</span>
+            <p>Award Winning Studio</p>
+          </div>
+        </div>
+        <div class="about-text reveal-right">
+          <p class="section-label">OUR STORY</p>
+          <h2 class="section-title">We Don't Just<br /><em>Take Photos</em><br />We Create Art</h2>
+          <p class="about-desc">DFX Studio was born from a passion for visual storytelling. Based in Nashik, we blend technical mastery with artistic vision to deliver breathtaking photographs and cinematic videos that make your memories last forever.</p>
+          <p class="about-desc">Every frame is carefully composed, every moment thoughtfully captured — because your story deserves nothing less than extraordinary.</p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <div class="pillar-icon">📸</div>
+              <h4>Premium Equipment</h4>
+              <p>Sony & Canon professional gear for flawless results in any lighting</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">🎬</div>
+              <h4>Cinematic Style</h4>
+              <p>Hollywood-grade color grading and post-production workflow</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">💡</div>
+              <h4>Creative Vision</h4>
+              <p>Every shoot is uniquely crafted to reflect your personality</p>
+            </div>
+          </div>
+          <a href="#contact" class="btn-primary">Work With Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services" class="services section section-dark">
+    <div class="container">
+      <div class="section-header centered">
+        <p class="section-label">WHAT WE OFFER</p>
+        <h2 class="section-title">Our <em>Services</em></h2>
+        <p class="section-subtitle">From intimate portraits to grand celebrations — we cover every visual need</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal-up" style="--delay:0s">
+          <div class="service-img">
+            <img src="images/service-wedding.jpg" alt="Wedding Photography" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">💍</span>
+            <h3>Wedding Photography</h3>
+            <p>Full-day coverage capturing every emotion, from the haldi to the reception. Traditional & candid styles.</p>
+            <ul class="service-list">
+              <li>Pre-wedding shoot included</li>
+              <li>Edited gallery in 15 days</li>
+              <li>2 photographers on-site</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+        <div class="service-card reveal-up" style="--delay:0.1s">
+          <div class="service-img">
+            <img src="images/service-portrait.jpg" alt="Portrait Photography" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">🎭</span>
+            <h3>Portrait Sessions</h3>
+            <p>Professional headshots, maternity, family, and model portfolios with expert lighting and posing guidance.</p>
+            <ul class="service-list">
+              <li>Indoor & outdoor locations</li>
+              <li>Same-day preview</li>
+              <li>Retouched final images</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+        <div class="service-card reveal-up" style="--delay:0.2s">
+          <div class="service-img">
+            <img src="images/service-commercial.jpg" alt="Commercial Photography" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">🏢</span>
+            <h3>Commercial Shoots</h3>
+            <p>Product photography, brand visuals, corporate headshots, and advertising campaigns for businesses.</p>
+            <ul class="service-list">
+              <li>Full studio setup</li>
+              <li>Brand-aligned editing</li>
+              <li>Commercial license</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+        <div class="service-card reveal-up" style="--delay:0.3s">
+          <div class="service-img">
+            <img src="images/service-event.jpg" alt="Event Coverage" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">🎉</span>
+            <h3>Event Coverage</h3>
+            <p>Birthdays, engagements, corporate events, and cultural celebrations — fully documented.</p>
+            <ul class="service-list">
+              <li>Real-time sharing option</li>
+              <li>Video highlights reel</li>
+              <li>Online photo album</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+        <div class="service-card reveal-up" style="--delay:0.4s">
+          <div class="service-img">
+            <img src="images/service-video.jpg" alt="Video Production" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">🎥</span>
+            <h3>Video Production</h3>
+            <p>4K cinematic wedding films, brand videos, reels, and social media content with professional editing.</p>
+            <ul class="service-list">
+              <li>4K/6K resolution</li>
+              <li>Drone footage available</li>
+              <li>Cinematic color grading</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+        <div class="service-card reveal-up" style="--delay:0.5s">
+          <div class="service-img">
+            <img src="images/service-baby.jpg" alt="Baby & Maternity" loading="lazy" />
+            <div class="service-overlay"></div>
+          </div>
+          <div class="service-body">
+            <span class="service-icon">👶</span>
+            <h3>Baby & Maternity</h3>
+            <p>Gentle, safe newborn photography and maternity shoots that celebrate this beautiful chapter of life.</p>
+            <ul class="service-list">
+              <li>Safe baby posing expertise</li>
+              <li>Props & backdrops included</li>
+              <li>Dreamy soft editing</li>
+            </ul>
+            <a href="#contact" class="service-link">Enquire →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section id="gallery" class="gallery section">
+    <div class="container">
+      <div class="section-header centered">
+        <p class="section-label">OUR PORTFOLIO</p>
+        <h2 class="section-title">Featured <em>Gallery</em></h2>
+        <p class="section-subtitle">A glimpse into our world of visual storytelling</p>
+      </div>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">Wedding</button>
+        <button class="filter-btn" data-filter="portrait">Portrait</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+        <button class="filter-btn" data-filter="event">Events</button>
+      </div>
+      <div class="gallery-masonry" id="galleryGrid">
+        <div class="gallery-item tall" data-category="wedding">
+          <img src="images/gallery1.jpg" alt="Wedding photography" loading="lazy" />
+          <div class="gallery-hover"><span>Wedding</span></div>
+        </div>
+        <div class="gallery-item" data-category="portrait">
+          <img src="images/gallery2.jpg" alt="Portrait photography" loading="lazy" />
+          <div class="gallery-hover"><span>Portrait</span></div>
+        </div>
+        <div class="gallery-item" data-category="commercial">
+          <img src="images/gallery3.jpg" alt="Commercial photography" loading="lazy" />
+          <div class="gallery-hover"><span>Commercial</span></div>
+        </div>
+        <div class="gallery-item wide" data-category="wedding">
+          <img src="images/gallery4.jpg" alt="Wedding ceremony" loading="lazy" />
+          <div class="gallery-hover"><span>Wedding</span></div>
+        </div>
+        <div class="gallery-item tall" data-category="portrait">
+          <img src="images/gallery5.jpg" alt="Model portrait" loading="lazy" />
+          <div class="gallery-hover"><span>Portrait</span></div>
+        </div>
+        <div class="gallery-item" data-category="event">
+          <img src="images/gallery6.jpg" alt="Event coverage" loading="lazy" />
+          <div class="gallery-hover"><span>Event</span></div>
+        </div>
+        <div class="gallery-item" data-category="commercial">
+          <img src="images/gallery7.jpg" alt="Commercial shoot" loading="lazy" />
+          <div class="gallery-hover"><span>Commercial</span></div>
+        </div>
+        <div class="gallery-item wide" data-category="event">
+          <img src="images/gallery8.jpg" alt="Event photography" loading="lazy" />
+          <div class="gallery-hover"><span>Event</span></div>
+        </div>
+        <div class="gallery-item" data-category="wedding">
+          <img src="images/gallery9.jpg" alt="Wedding detail shot" loading="lazy" />
+          <div class="gallery-hover"><span>Wedding</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeLightbox(-1)">‹</button>
+    <button class="lightbox-next" onclick="changeLightbox(1)">›</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- ═══ VIDEOS ═══ -->
+  <section id="videos" class="videos section section-dark">
+    <div class="container">
+      <div class="section-header centered">
+        <p class="section-label">CINEMATIC WORK</p>
+        <h2 class="section-title">Featured <em>Videos</em></h2>
+        <p class="section-subtitle">Watch our cinematic stories come alive</p>
+      </div>
+      <div class="videos-grid">
+        <div class="video-card featured reveal-up">
+          <div class="video-thumb">
+            <video src="videos/highlight1.mp4" poster="images/video-poster1.jpg" loop muted playsinline></video>
+            <div class="video-overlay">
+              <button class="play-btn" onclick="playVideo(this)">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+            <div class="video-badge">WEDDING FILM</div>
+          </div>
+          <div class="video-info">
+            <h3>Rohan & Priya — Wedding Story</h3>
+            <p>A cinematic journey through two souls becoming one</p>
+          </div>
+        </div>
+        <div class="video-card reveal-up" style="--delay:0.1s">
+          <div class="video-thumb">
+            <video src="videos/highlight2.mp4" poster="images/video-poster2.jpg" loop muted playsinline></video>
+            <div class="video-overlay">
+              <button class="play-btn" onclick="playVideo(this)">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+            <div class="video-badge">COMMERCIAL</div>
+          </div>
+          <div class="video-info">
+            <h3>Brand Reel — Fashion Shoot</h3>
+            <p>Visual brand identity for lifestyle brands</p>
+          </div>
+        </div>
+        <div class="video-card reveal-up" style="--delay:0.2s">
+          <div class="video-thumb">
+            <video src="videos/highlight3.mp4" poster="images/video-poster3.jpg" loop muted playsinline></video>
+            <div class="video-overlay">
+              <button class="play-btn" onclick="playVideo(this)">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+            <div class="video-badge">EVENT</div>
+          </div>
+          <div class="video-info">
+            <h3>Corporate Event Highlight</h3>
+            <p>Annual gala coverage — 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="videos-cta">
+        <p>Want to see more of our work?</p>
+        <a href="https://www.youtube.com/@dfxstudio" target="_blank" class="btn-primary">Watch on YouTube →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section class="process section">
+    <div class="container">
+      <div class="section-header centered">
+        <p class="section-label">HOW IT WORKS</p>
+        <h2 class="section-title">Our <em>Process</em></h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal-up">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Enquiry & Consultation</h3>
+            <p>Share your vision with us. We'll discuss your needs, dates, and create a tailored plan for your shoot.</p>
+          </div>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step reveal-up" style="--delay:0.15s">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>Booking & Planning</h3>
+            <p>Confirm your package, location scouting, mood board creation, and logistics planning.</p>
+          </div>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step reveal-up" style="--delay:0.3s">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>The Shoot</h3>
+            <p>Our team arrives prepared. We capture every moment with professionalism and artistic flair.</p>
+          </div>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step reveal-up" style="--delay:0.45s">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <h3>Delivery</h3>
+            <p>Beautifully edited photos/videos delivered to your private online gallery within the agreed timeline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section id="testimonials" class="testimonials section section-dark">
+    <div class="container">
+      <div class="section-header centered">
+        <p class="section-label">CLIENT LOVE</p>
+        <h2 class="section-title">What They <em>Say</em></h2>
+      </div>
+      <div class="testimonials-carousel" id="testimonialsCarousel">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"DFX Studio captured our wedding day so beautifully. Every single photo tells a story. We were blown away by the quality and their professionalism throughout the day."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">A</div>
+              <div>
+                <strong>Aarti & Rahul Sharma</strong>
+                <span>Wedding, Nashik 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"Our maternity shoot with DFX was magical. The team made us feel so comfortable and the photos are beyond our expectations. Will definitely book again for the baby shoot!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">P</div>
+              <div>
+                <strong>Priyanka Desai</strong>
+                <span>Maternity Shoot 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"Absolutely cinematic wedding video! It makes me cry every time I watch it. The attention to detail, the music, the storytelling — DFX Studio is truly world class."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">S</div>
+              <div>
+                <strong>Sneha & Vikram Patil</strong>
+                <span>Wedding Film 2023</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"The product shoot DFX did for our brand completely transformed our marketing. Sales went up 40% after using their photos on our website. Worth every rupee!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">R</div>
+              <div>
+                <strong>Ravi Kulkarni</strong>
+                <span>Commercial Shoot 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"DFX Studio did our corporate annual event and the results were phenomenal. Professional, punctual, and incredibly talented. Our team loved the final photos!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">M</div>
+              <div>
+                <strong>Meera Joshi</strong>
+                <span>Corporate Event 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="moveCarousel(-1)">‹</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" onclick="moveCarousel(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <p class="section-label">GET IN TOUCH</p>
+          <h2 class="section-title">Let's Create<br /><em>Magic</em> Together</h2>
+          <p class="contact-desc">Ready to book your session or have questions? Fill out the form and we'll get back to you within 24 hours.</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="detail-icon">📍</span>
+              <div>
+                <strong>Location</strong>
+                <p>Nashik, Maharashtra, India</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="detail-icon">📞</span>
+              <div>
+                <strong>Phone / WhatsApp</strong>
+                <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="detail-icon">✉️</span>
+              <div>
+                <strong>Email</strong>
+                <p><a href="mailto:hello@dfxstudio.com">hello@dfxstudio.com</a></p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="detail-icon">🕐</span>
+              <div>
+                <strong>Working Hours</strong>
+                <p>Mon–Sat: 9 AM – 7 PM</p>
+              </div>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://instagram.com/dfxstudio" target="_blank" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://facebook.com/dfxstudio" target="_blank" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://youtube.com/@dfxstudio" target="_blank" class="social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://wa.me/919876543210" target="_blank" class="social-btn" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div class="form-group">
+                <label for="service">Service Required *</label>
+                <select id="service" name="service" required>
+                  <option value="">Select a service</option>
+                  <option value="Wedding Photography">Wedding Photography</option>
+                  <option value="Portrait Session">Portrait Session</option>
+                  <option value="Commercial Shoot">Commercial Shoot</option>
+                  <option value="Event Coverage">Event Coverage</option>
+                  <option value="Video Production">Video Production</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="eventDate">Event / Shoot Date</label>
+              <input type="date" id="eventDate" name="eventDate" />
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us About Your Vision *</label>
+              <textarea id="message" name="message" rows="5" placeholder="Describe your dream shoot, location preferences, special requirements..." required></textarea>
+            </div>
+            <div id="formAlert" class="form-alert hidden"></div>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <span class="btn-text">Send Enquiry</span>
+              <span class="btn-loader hidden">Sending...</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MAP ═══ -->
+  <section class="map-section">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120013.72085989867!2d73.72739835!3d19.9974534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeba40c1ec42b%3A0x1e4c4e8e7ee62b0!2sNashik%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+      width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="DFX Studio Location - Nashik">
+    </iframe>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-dfx">DFX</span>
+            <span class="logo-studio">STUDIO</span>
+          </div>
+          <p>Capturing life's most precious moments with cinematic artistry. Based in Nashik, serving all of Maharashtra and beyond.</p>
+          <div class="footer-social">
+            <a href="https://instagram.com/dfxstudio" target="_blank" aria-label="Instagram">📷</a>
+            <a href="https://facebook.com/dfxstudio" target="_blank" aria-label="Facebook">📘</a>
+            <a href="https://youtube.com/@dfxstudio" target="_blank" aria-label="YouTube">▶️</a>
+            <a href="https://wa.me/919876543210" target="_blank" aria-label="WhatsApp">💬</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Wedding Photography</a></li>
+            <li><a href="#services">Portrait Sessions</a></li>
+            <li><a href="#services">Commercial Shoots</a></li>
+            <li><a href="#services">Event Coverage</a></li>
+            <li><a href="#services">Video Production</a></li>
+            <li><a href="#services">Baby & Maternity</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#gallery">Portfolio</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Book a Session</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>📍 Nashik, Maharashtra</li>
+            <li>📞 <a href="tel:+919876543210">+91 98765 43210</a></li>
+            <li>✉️ <a href="mailto:hello@dfxstudio.com">hello@dfxstudio.com</a></li>
+            <li>🕐 Mon–Sat: 9 AM – 7 PM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> DFX Studio. All rights reserved. | Crafted with ❤️ in Nashik</p>
+        <p class="footer-credits">Photography is the art of frozen time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/919876543210?text=Hi DFX Studio! I'd like to book a session." target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <!-- Scroll to Top -->
+  <button id="scrollTop" class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
