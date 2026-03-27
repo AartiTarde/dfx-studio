@@ -1,20 +1,14 @@
-import dotenv from 'dotenv';
-dotenv.config();
+require('dotenv').config();
 
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import dns from 'dns';
-import connectDB from './config/database.js';
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const path = require('path');
+const dns = require('dns');
+const connectDB = require('./config/database');
 
-// Fix __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Fix DNS
+// DNS fix
 dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 const app = express();
@@ -41,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-import contactRoutes from './routes/contact.js';
+const contactRoutes = require('./routes/contact');
 app.use('/api/contact', contactRoutes);
 
 // Health
