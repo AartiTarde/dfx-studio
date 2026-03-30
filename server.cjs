@@ -19,7 +19,7 @@ connectDB();
 // Middleware
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
-
+app.set("trust proxy", 1);
 // Rate limit
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
