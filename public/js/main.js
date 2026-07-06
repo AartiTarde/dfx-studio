@@ -84,7 +84,7 @@ function nextSlide() {
 setInterval(nextSlide, 5000);
 
 // ── COUNTER ANIMATION ──
-function animateCounter(el, target, duration = 2000) {
+/*function animateCounter(el, target, duration = 2000) {
   let start = 0;
   const step = target / (duration / 16);
   const timer = setInterval(() => {
@@ -96,6 +96,28 @@ function animateCounter(el, target, duration = 2000) {
       el.textContent = Math.floor(start);
     }
   }, 16);
+}*/
+function animateCounter(id, target) {
+    const element = document.getElementById(id);
+
+    if (!element) {
+        console.error(`Element with id '${id}' not found.`);
+        return;
+    }
+
+    let current = 0;
+    const increment = Math.ceil(target / 100);
+
+    const timer = setInterval(() => {
+        current += increment;
+
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+
+        element.textContent = current;
+    }, 20);
 }
 
 // ── INTERSECTION OBSERVER ──
@@ -246,7 +268,8 @@ document.querySelectorAll('.video-thumb').forEach(thumb => {
 
 // ── TESTIMONIALS CAROUSEL ──
 const track = document.getElementById('testimonialTrack');
-const cards = document.querySelectorAll('.testimonial-card');
+//const cards = document.querySelectorAll('.testimonial-card');
+let cards = [];
 const dotsContainer = document.getElementById('carouselDots');
 let currentCarousel = 0;
 let cardsPerView = 3;
@@ -310,7 +333,7 @@ const contactForm = document.getElementById('contactForm');
 const formAlert = document.getElementById('formAlert');
 const submitBtn = document.getElementById('submitBtn');
 
-contactForm.addEventListener('submit', async (e) => {
+/*contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const formData = {
@@ -357,7 +380,61 @@ contactForm.addEventListener('submit', async (e) => {
     setLoading(false);
   }
 });
+*/
 
+//const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", submitBooking);
+
+async function submitBooking(e) {
+
+    e.preventDefault();
+
+    const booking = {
+
+        name: document.getElementById("name").value.trim(),
+
+        phone: document.getElementById("phone").value.trim(),
+
+        email: document.getElementById("email").value.trim(),
+
+        service: document.getElementById("service").value,
+
+        eventDate: document.getElementById("eventDate").value
+            ? new Date(document.getElementById("eventDate").value).toISOString()
+            : null,
+
+        message: document.getElementById("message").value.trim()
+
+    };
+
+    if (!booking.name ||
+        !booking.email ||
+        !booking.service ||
+        !booking.message) {
+
+        alert("Please fill all required fields.");
+
+        return;
+
+    }
+
+    const result = await ApiService.postBooking(booking);
+
+    if (result != null) {
+
+        alert("Booking submitted successfully.");
+
+        contactForm.reset();
+
+    }
+    else {
+
+        alert("Unable to submit booking.");
+
+    }
+
+}
 function showAlert(message, type) {
   formAlert.textContent = message;
   formAlert.className = `form-alert ${type}`;
@@ -410,3 +487,356 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(s => sectionObserver.observe(s));
 
 console.log('🎬 DFX Studio — Welcome to the website!');
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const stats = await ApiService.getStats();
+
+    if (!stats) return;
+
+    animateCounter("projectsDone", stats.projectsDone);
+    animateCounter("yearsExperience", stats.yearsExperience);
+    animateCounter("happyClients", stats.happyClients);
+});
+
+function animateCounter(id, target) {
+    const element = document.getElementById(id);
+
+    let current = 0;
+    const increment = Math.ceil(target / 100);
+
+    const timer = setInterval(() => {
+        current += increment;
+
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+
+        element.textContent = current;
+    }, 20);
+}
+async function loadServices() {
+    const services = await ApiService.getServices();
+
+    const grid = document.getElementById("servicesGrid");
+
+    if (!grid || !services) return;
+
+    let html = "";
+
+    services.forEach((service, index) => {
+
+        const points = service.points
+            .map(point => `<li>${point}</li>`)
+            .join("");
+
+        html += `
+            <div class="service-card reveal-up" style="--delay:${index * 0.1}s">
+                <div class="service-img">
+                    <img src="http://localhost:5000${service.imageUrl}"
+                         alt="${service.title}"
+                         loading="lazy" />
+                    <div class="service-overlay"></div>
+                </div>
+
+                <div class="service-body">
+                    <span class="service-icon">${service.icon}</span>
+
+                    <h3>${service.title}</h3>
+
+                    <p>${service.description}</p>
+
+                    <ul class="service-list">
+                        ${points}
+                    </ul>
+
+                    <a href="#contact" class="service-link">
+                        Enquire →
+                    </a>
+                </div>
+            </div>
+        `;
+    });
+
+    grid.innerHTML = html;
+
+    // Re-run reveal animation if your site uses one
+    if (typeof revealElements === "function") {
+        revealElements();
+    }
+}
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadStats();
+    await loadServices();
+     await loadGallery();
+      await loadReviews();
+});
+
+async function loadStats() {
+
+    const stats = await ApiService.getStats();
+
+    if (!stats) return;
+
+    animateCounter("projectsDone", stats.projectsDone);
+    animateCounter("yearsExperience", stats.yearsExperience);
+    animateCounter("happyClients", stats.happyClients);
+
+}
+
+function animateCounter(id, target) {
+
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    let current = 0;
+
+    const step = Math.ceil(target / 100);
+
+    const timer = setInterval(() => {
+
+        current += step;
+
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+
+        element.textContent = current;
+
+    }, 20);
+}
+
+
+async function loadServices() {
+
+    const services = await ApiService.getServices();
+
+    if (!services) return;
+
+    const grid = document.getElementById("servicesGrid");
+
+    if (!grid) {
+        console.error("servicesGrid not found");
+        return;
+    }
+
+    let html = "";
+
+    services.forEach(service => {
+
+        html += `
+            <div class="service-card">
+
+                <div class="service-img">
+                    <img
+                        src="http://localhost:5000${service.imageUrl}"
+                        alt="${service.title}">
+                </div>
+
+                <div class="service-body">
+
+                    <span class="service-icon">${service.icon}</span>
+
+                    <h3>${service.title}</h3>
+
+                    <p>${service.description}</p>
+
+                </div>
+
+            </div>
+        `;
+    });
+
+    grid.innerHTML = html;
+
+    console.log("Services Rendered");
+}
+
+async function loadGallery() {
+
+    const gallery = await ApiService.getGallery();
+
+    if (!gallery) return;
+
+    const grid = document.getElementById("galleryGrid");
+
+    if (!grid) {
+        console.error("galleryGrid not found");
+        return;
+    }
+
+    let html = "";
+
+    gallery.forEach((item, index) => {
+
+        let extraClass = "";
+
+        if (index % 4 === 0)
+            extraClass = "tall";
+        else if (index % 3 === 0)
+            extraClass = "wide";
+
+        html += `
+            <div class="gallery-item ${extraClass}" data-category="${item.category}">
+
+                <img
+                    src="${SERVER_URL}${item.imageUrl}"
+                    alt="${item.category}"
+                    loading="lazy">
+
+                <div class="gallery-hover">
+                    <span>${capitalize(item.category)}</span>
+                </div>
+
+            </div>
+        `;
+    });
+
+    grid.innerHTML = html;
+
+    initializeGalleryFilter();
+    initializeLightbox();
+}
+
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function initializeGalleryFilter() {
+
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+
+    filterBtns.forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            filterBtns.forEach(b => b.classList.remove("active"));
+
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+
+            galleryItems.forEach(item => {
+
+                if (filter === "all" || item.dataset.category === filter)
+                    item.style.display = "";
+                else
+                    item.style.display = "none";
+
+            });
+
+        });
+
+    });
+
+}
+
+
+
+async function loadReviews() {
+
+    const reviews = await ApiService.getReviews();
+
+    if (!reviews) return;
+
+    const track = document.getElementById("testimonialTrack");
+
+    if (!track) {
+        console.error("testimonialTrack not found");
+        return;
+    }
+
+    let html = "";
+
+    reviews.forEach(review => {
+
+        html += `
+            <div class="testimonial-card">
+
+                <div class="stars">
+                    ${getStars(review.rating)}
+                </div>
+
+                <p class="testimonial-text">
+                    "${review.comment}"
+                </p>
+
+                <div class="testimonial-author">
+
+                    <div class="author-avatar">
+                        ${review.avatar}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${review.name}
+                        </strong>
+
+                        <span>
+                            ${review.label}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+    });
+
+    track.innerHTML = html;
+
+    initializeTestimonials();
+
+}
+
+function getStars(rating) {
+
+    return "★".repeat(rating) + "☆".repeat(5 - rating);
+
+}
+
+function initializeTestimonials() {
+
+    cards = document.querySelectorAll(".testimonial-card");
+
+    cardsPerView = getCardsPerView();
+
+
+    buildDots();
+
+    updateCarousel();
+
+    resetAutoplay();
+
+}
+
+function initializeLightbox() {
+
+    buildLightboxList();
+
+    document.querySelectorAll(".gallery-item").forEach(item => {
+
+        item.addEventListener("click", () => {
+
+            const img = item.querySelector("img");
+
+            buildLightboxList();
+
+            const index = lightboxImages.findIndex(i => i.src === img.src);
+
+            currentLightboxIndex = index >= 0 ? index : 0;
+
+            openLightbox();
+
+        });
+
+    });
+
+}

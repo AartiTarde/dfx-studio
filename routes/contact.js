@@ -14,93 +14,159 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// POST /api/contact - Submit contact form
+/**
+ * Utility: Normalize date (remove time part)
+ */
+const normalizeDate = (date) => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
+
+// ==============================
+// POST /api/contact (BOOKING)
+// ==============================
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, service, eventDate, message } = req.body;
 
-    // Save to database
+    // ❗ Validate required fields
+    if (!name || !email || !service || !eventDate) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name, email, service, and event date are required',
+      });
+    }
+
+    const selectedDate = normalizeDate(eventDate);
+
+    // ❗ Check if date already booked
+    const existingBooking = await Contact.findOne({
+      eventDate: {
+        $gte: selectedDate,
+        $lt: new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000),
+      },
+    });
+
+    if (existingBooking) {
+      return res.status(400).json({
+        success: false,
+        message: 'This date is already booked. Please choose another date.',
+      });
+    }
+
+    // ✅ Save booking
     const contact = await Contact.create({
       name,
       email,
       phone,
       service,
-      eventDate: eventDate ? new Date(eventDate) : undefined,
+      eventDate: selectedDate,
       message,
     });
 
-    // Send notification email to studio (optional, won't fail if email not configured)
+    // ==============================
+    // Send notification email
+    // ==============================
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_TO,
         subject: `New Inquiry from ${name} - DFX Studio`,
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #c9a84c;">New Client Inquiry - DFX Studio</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px; font-weight: bold;">Name:</td><td style="padding: 8px;">${name}</td></tr>
-              <tr><td style="padding: 8px; font-weight: bold;">Email:</td><td style="padding: 8px;">${email}</td></tr>
-              <tr><td style="padding: 8px; font-weight: bold;">Phone:</td><td style="padding: 8px;">${phone || 'Not provided'}</td></tr>
-              <tr><td style="padding: 8px; font-weight: bold;">Service:</td><td style="padding: 8px;">${service}</td></tr>
-              <tr><td style="padding: 8px; font-weight: bold;">Event Date:</td><td style="padding: 8px;">${eventDate || 'Not specified'}</td></tr>
-              <tr><td style="padding: 8px; font-weight: bold;">Message:</td><td style="padding: 8px;">${message}</td></tr>
-            </table>
-          </div>
+          <h2>New Booking</h2>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Phone:</b> ${phone || 'N/A'}</p>
+          <p><b>Service:</b> ${service}</p>
+          <p><b>Date:</b> ${selectedDate.toDateString()}</p>
+          <p><b>Message:</b> ${message}</p>
         `,
       });
-    } catch (emailError) {
-      console.log('Email notification failed (non-critical):', emailError.message);
+    } catch (err) {
+      console.log('Email failed:', err.message);
     }
 
-    // Send auto-reply to client
+    // ==============================
+    // Send auto-reply
+    // ==============================
     try {
       await transporter.sendMail({
         from: `"DFX Studio" <${process.env.EMAIL_USER}>`,
         to: email,
-        subject: 'Thank you for contacting DFX Studio!',
+        subject: 'Booking Received - DFX Studio',
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
-            <h1 style="color: #c9a84c; text-align: center;">DFX Studio</h1>
-            <h2 style="color: #fff;">Thank you, ${name}!</h2>
-            <p style="color: #ccc; line-height: 1.6;">We have received your inquiry for <strong style="color: #c9a84c;">${service}</strong>. Our team will get back to you within 24 hours.</p>
-            <p style="color: #ccc;">We look forward to capturing your special moments!</p>
-            <hr style="border-color: #333; margin: 30px 0;">
-            <p style="color: #888; font-size: 12px; text-align: center;">DFX Studio | Professional Photography & Videography</p>
-          </div>
+          <h2>Thank you ${name}</h2>
+          <p>Your booking for <b>${service}</b> on <b>${selectedDate.toDateString()}</b> is received.</p>
+          <p>We will contact you shortly.</p>
         `,
       });
-    } catch (emailError) {
-      console.log('Auto-reply email failed (non-critical):', emailError.message);
+    } catch (err) {
+      console.log('Auto-reply failed:', err.message);
     }
 
     res.status(201).json({
       success: true,
-      message: 'Your inquiry has been submitted successfully! We will contact you within 24 hours.',
+      message: 'Booking successful',
       id: contact._id,
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
-    if (error.name === 'ValidationError') {
-      const messages = Object.values(error.errors).map(e => e.message);
-      return res.status(400).json({ success: false, message: messages.join(', ') });
-    }
-    res.status(500).json({ success: false, message: 'Server error. Please try again later.' });
+    console.error('Booking error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+    });
   }
 });
 
-// GET /api/contact - Get all contacts (admin)
+
+// ==============================
+// GET /api/contact/booked-dates
+// ==============================
+router.get('/booked-dates', async (req, res) => {
+  try {
+    const bookings = await Contact.find({}, { eventDate: 1, _id: 0 });
+
+    const dates = bookings.map(b => normalizeDate(b.eventDate));
+
+    res.json({
+      success: true,
+      dates,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+
+// ==============================
+// GET /api/contact (ADMIN)
+// ==============================
 router.get('/', async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
-    res.json({ success: true, count: contacts.length, data: contacts });
+    res.json({
+      success: true,
+      count: contacts.length,
+      data: contacts,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 });
 
-// PATCH /api/contact/:id/status - Update contact status (admin)
+
+// ==============================
+// PATCH /api/contact/:id/status
+// ==============================
 router.patch('/:id/status', async (req, res) => {
   try {
     const contact = await Contact.findByIdAndUpdate(
@@ -108,10 +174,24 @@ router.patch('/:id/status', async (req, res) => {
       { status: req.body.status },
       { new: true, runValidators: true }
     );
-    if (!contact) return res.status(404).json({ success: false, message: 'Contact not found' });
-    res.json({ success: true, data: contact });
+
+    if (!contact) {
+      return res.status(404).json({
+        success: false,
+        message: 'Contact not found',
+      });
+    }
+
+    res.json({
+      success: true,
+      data: contact,
+    });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 });
 
