@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:5000";
+const SERVER_URL = "https://dfxstudio-backend-api-v2-1.onrender.com";
 const API_BASE_URL = `${SERVER_URL}/api`;
 
 const ApiService = {
